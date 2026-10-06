@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block title %}Audio Analyser{% endblock %}
+{% block n_audio %}on{% endblock %}
+{% block content %}
+<h1>🎧 Audio Analyser</h1>
+<p class="sub">Upload a file to see its details.</p>
+<div class="card">
+  <form method="POST" enctype="multipart/form-data">
+    <label class="drop">
+      <span class="txt">Click to choose a file</span>
+      <input type="file" name="file" accept="audio/*" required>
+    </label>
+    <button type="submit">Analyse</button>
+  </form>
+</div>
+{% if data %}
+<div class="card">
+  <audio class="preview" controls src="{{ url_for('uploaded_file', filename=data.filename) }}"></audio>
+  <table>
+    <tr><th>File name</th><td>{{ data.filename }}</td></tr>
+    <tr><th>Duration</th><td>{{ data.duration }} sec</td></tr>
+    <tr><th>Bitrate</th><td>{{ data.bitrate }} kbps</td></tr>
+    <tr><th>Size</th><td>{{ data.size_kb }} KB</td></tr>
+  </table>
+</div>
+{% endif %}
+{% endblock %}

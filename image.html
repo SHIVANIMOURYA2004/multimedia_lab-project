@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block title %}Image Analyser{% endblock %}
+{% block n_image %}on{% endblock %}
+{% block content %}
+<h1>🖼️ Image Analyser</h1>
+<p class="sub">Upload a file to see its details.</p>
+<div class="card">
+  <form method="POST" enctype="multipart/form-data">
+    <label class="drop">
+      <span class="txt">Click to choose a file</span>
+      <input type="file" name="file" accept="image/*" required>
+    </label>
+    <button type="submit">Analyse</button>
+  </form>
+</div>
+{% if data %}
+<div class="card">
+  <img class="preview" src="{{ url_for('uploaded_file', filename=data.filename) }}" alt="preview">
+  <table>
+    <tr><th>File name</th><td>{{ data.filename }}</td></tr>
+    <tr><th>Format</th><td>{{ data.format }}</td></tr>
+    <tr><th>Mode</th><td>{{ data.mode }}</td></tr>
+    <tr><th>Width</th><td>{{ data.width }} px</td></tr>
+    <tr><th>Height</th><td>{{ data.height }} px</td></tr>
+    <tr><th>Size</th><td>{{ data.size_kb }} KB</td></tr>
+  </table>
+</div>
+{% endif %}
+{% endblock %}

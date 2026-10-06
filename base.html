@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{% block title %}Multimedia Analyser{% endblock %}</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+<header>
+  <a class="logo" href="/">Multimedia<span>Analyser</span></a>
+  <nav>
+    <a href="/image" class="{% block n_image %}{% endblock %}">Image</a>
+    <a href="/video" class="{% block n_video %}{% endblock %}">Video</a>
+    <a href="/audio" class="{% block n_audio %}{% endblock %}">Audio</a>
+  </nav>
+</header>
+<main>{% block content %}{% endblock %}</main>
+<footer>Multimedia subject project &middot; Flask</footer>
+<script>
+document.querySelectorAll('.drop input').forEach(function(i){
+  i.addEventListener('change',function(){
+    var t=i.parentElement.querySelector('.txt');
+    if(i.files.length){t.textContent=i.files[0].name;}
+  });
+});
+</script>
+</body>
+</html>
